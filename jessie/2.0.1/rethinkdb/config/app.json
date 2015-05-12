@@ -1,0 +1,19 @@
+{
+  "services": [
+    {
+      "name": "rethinkdb-web",
+      "tags": ["ops"],
+      "port": 8080
+    },
+    {
+      "name": "rethinkdb-client",
+      "tags": ["db"],
+      "port": 28015
+    },
+    {
+      "name": "rethinkdb-intracluster",
+      "tags": ["ops", "db-internal"],
+      "port": 29015
+    }
+  ]
+}

@@ -1,6 +1,6 @@
-FROM debian:jessie
+FROM withinboredom/consul-base
 
-MAINTAINER Stuart P. Bentley <stuart@testtrack4.com>
+MAINTAINER Robert Landers <landers.robert@gmail.com>
 
 # Add the RethinkDB repository and public key
 # "RethinkDB Packaging <packaging@rethinkdb.com>" http://download.rethinkdb.com/apt/pubkey.gpg
@@ -10,14 +10,17 @@ RUN echo "deb http://download.rethinkdb.com/apt jessie main" > /etc/apt/sources.
 ENV RETHINKDB_PACKAGE_VERSION 2.0.1~0jessie
 
 RUN apt-get update \
-	&& apt-get install -y rethinkdb=$RETHINKDB_PACKAGE_VERSION \
+	&& apt-get install -y rethinkdb=$RETHINKDB_PACKAGE_VERSION dnsutils \
 	&& rm -rf /var/lib/apt/lists/*
 
 VOLUME ["/data"]
 
 WORKDIR /data
 
-CMD ["rethinkdb", "--bind", "all"]
+ADD ./app.sh /bin/app.sh
+RUN chmod +x /bin/app.sh
+
+ENTRYPOINT ["/bin/app.sh"]
 
 #   process cluster webui
 EXPOSE 28015 29015 8080
