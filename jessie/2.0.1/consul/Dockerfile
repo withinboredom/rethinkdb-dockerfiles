@@ -29,5 +29,7 @@ EXPOSE 8300 8301 8301/udp 8302 8302/udp 8400 8500 53/udp
 #Create a mount point
 VOLUME ["/data"]
 
+ENV MASTER ""
+
 # Entry point of container
 ENTRYPOINT ["/bin/launch.sh"]

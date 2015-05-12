@@ -23,5 +23,5 @@ then
 	rethinkdb --bind all "$@"
 else
 	echo "Joining a cluster!!!"
-	rethinkdb --bind all --join $joiner "$@"
+	rethinkdb --bind all --join "$joiner" "$@"
 fi
